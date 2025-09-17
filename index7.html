@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusCart - Stationery & Study Essentials</title>
+  <style>
+    /* --- Global Styles --- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa, #e6e9f0);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* --- Header --- */
+    header {
+      background: linear-gradient(90deg, #2c3e50, #4ca1af);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #ffd700;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      font-size: 16px;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .cart {
+      background: #ffd700;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #2c3e50;
+      font-weight: bold;
+      margin-left: 15px;
+    }
+
+    /* --- Search Bar --- */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    .search-bar input {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 20px 0 0 20px;
+      outline: none;
+      font-size: 14px;
+      width: 180px;
+    }
+
+    .search-bar button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 0 20px 20px 0;
+      background: #ffd700;
+      color: #2c3e50;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .search-bar button:hover {
+      background: #f1c40f;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                  url("https://images.pexels.com/photos/159740/study-school-learning-teach-159740.jpeg") no-repeat center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 40px;
+      background: rgba(255, 215, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      color: #2c3e50;
+    }
+
+    /* --- Products Section --- */
+    .products {
+      padding: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, #ffffff, #f0f0f0);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:nth-child(odd) {
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    }
+
+    .product-card:nth-child(even) {
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-info h3 {
+      margin: 10px 0;
+      color: #2c3e50;
+    }
+
+    .product-info p {
+      color: #1a8b3e;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2c3e50;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #ffd700;
+      color: #2c3e50;
+      transform: scale(1.05);
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: linear-gradient(90deg, #2c3e50, #4ca1af);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>CampusCart</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Stationery</a>
+      <a href="#">Books</a>
+      <a href="#">Art Supplies</a>
+      <a href="#">Contact</a>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search products...">
+        <button onclick="searchProduct()">🔍</button>
+      </div>
+
+      <span class="cart" onclick="viewCart()">🛒 Cart (<span id="cart-count">0</span>)</span>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to CampusCart</h2>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="product-card">
+      <img src="Assignment1.jpeg" alt="Assignment Books">
+      <div class="product-info">
+        <h3>Assignment Books</h3>
+        <p>₹ 20</p>
+        <span class="btn" onclick="addToCart('Assignment Books')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.pexels.com/photos/5386433/pexels-photo-5386433.jpeg" alt="Long Notebooks">
+      <div class="product-info">
+        <h3>Long Notebooks</h3>
+        <p>₹ 35</p>
+        <span class="btn" onclick="addToCart('Long Notebooks')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://plus.unsplash.com/premium_photo-1664110690520-24c245c8fc32?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pens">
+      <div class="product-info">
+        <h3>Pens</h3>
+        <p>₹ 10</p>
+        <span class="btn" onclick="addToCart('Pens')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1590243107381-a5e2bd5ef4ba?q=80&w=668&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pencils">
+      <div class="product-info">
+        <h3>Pencils</h3>
+        <p>₹ 05</p>
+        <span class="btn" onclick="addToCart('Pencils')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1667532447990-51c6704ef358?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Erasers">
+      <div class="product-info">
+        <h3>Erasers</h3>
+        <p>₹ 5</p>
+        <span class="btn" onclick="addToCart('Erasers')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1605808725370-5857ca06cd78?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sharpeners">
+      <div class="product-info">
+        <h3>Sharpeners</h3>
+        <p>₹ 5</p>
+        <span class="btn" onclick="addToCart('Sharpeners')">Add to Cart</span>
+      </div>
+    </div>
+
+    <!-- Extra Products -->
+    <div class="product-card">
+      <img src="Record1.jpeg" alt="Record Pads">
+      <div class="product-info">
+        <h3>Record Pads</h3>
+        <p>₹ 55</p>
+        <span class="btn" onclick="addToCart('Record Pads')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1574607383077-47ddc2dc51c4?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Calculator">
+      <div class="product-info">
+        <h3>Calculator</h3>
+        <p>₹ 749</p>
+        <span class="btn" onclick="addToCart('Calculator')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1630734277837-ebe62757b6e0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="A4 Sheets">
+      <div class="product-info">
+        <h3>A4 Sheets</h3>
+        <p>₹ 100</p>
+        <span class="btn" onclick="addToCart('A4 Sheets')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://plus.unsplash.com/premium_photo-1724152362624-6a2aac79344f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sketch Pens">
+      <div class="product-info">
+        <h3>Sketch Pens</h3>
+        <p>₹ 99</p>
+        <span class="btn" onclick="addToCart('Sketch Pens')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://plus.unsplash.com/premium_photo-1667943534000-092b4dc80c13?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Paint Brushes">
+      <div class="product-info">
+        <h3>Paint Brushes</h3>
+        <p>₹ 199</p>
+        <span class="btn" onclick="addToCart('Paint Brushes')">Add to Cart</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1711917357513-fde2b63902c1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Paintings">
+      <div class="product-info">
+        <h3>Paints</h3>
+        <p>₹ 599</p>
+        <span class="btn" onclick="addToCart('Paintings')">Add to Cart</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CampusCart. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let cartCount = 0;
+    function addToCart(item) {
+      cartCount++;
+      document.getElementById("cart-count").innerText = cartCount;
+      alert(item + " added to cart!");
+    }
+
+    function viewCart() {
+      alert("You have " + cartCount + " items in your cart.");
+    }
+
+    function searchProduct() {
+      let query = document.querySelector(".search-bar input").value;
+      if(query.trim() !== "") {
+        alert("Searching for: " + query);
+      } else {
+        alert("Please enter a product name to search.");
+      }
+    }
+  </script>
+</body>
+</html>
